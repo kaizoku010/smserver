@@ -1,8 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
 import productRoutes from './routes/products.js';
 import orderRoutes from './routes/orders.js';
@@ -10,21 +8,32 @@ import userRoutes from './routes/users.js';
 import healthRoutes from './routes/health.js';
 import dotenv from 'dotenv';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 dotenv.config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.static('public'));
+// Production-ready CORS configuration
+const allowedOrigins = [
+  'http://localhost:5173', // Vite dev server
+  'http://localhost:8080', // Alternative local port
+];
 
-// Basic root route - now serves the status page
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
+app.use(express.json());
+
+// Basic root route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'status.html'));
+  res.json({ message: 'Sembeza API is running' });
 });
 
 // Routes
