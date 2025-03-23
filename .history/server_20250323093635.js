@@ -44,12 +44,7 @@ const mongooseOptions = {
 // Connect to MongoDB
 const startServer = async () => {
   try {
-    const uri = process.env.MONGODB_URI;
-    if (!uri) {
-      throw new Error('MONGODB_URI environment variable is not defined');
-    }
-
-    await mongoose.connect(uri, mongooseOptions);
+    await mongoose.connect(process.env.MONGODB_URI, mongooseOptions);
     console.log('MongoDB Connected Successfully');
     
     const PORT = process.env.PORT || 8000;
@@ -76,5 +71,4 @@ process.on('unhandledRejection', (err) => {
 startServer();
 
 export default app;
-
 
