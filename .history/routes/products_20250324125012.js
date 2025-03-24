@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find();
-    console.log("all products: ", products)
+    console.log("all products: ", )
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
