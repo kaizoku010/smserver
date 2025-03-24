@@ -29,9 +29,10 @@ router.get('/:id', async (req, res) => {
 
 // Create product (admin only)
 router.post('/', [verifyToken, isAdmin], async (req, res) => {
-console.log("product recieved", req.body)
 
   try {
+    console.log('Create Product Request Body:', req.body);
+    console.log('Auth Header:', req.headers.authorization);
     const { name, description, price, image, category, stock } = req.body;
     const product = new Product({
       name,
@@ -41,7 +42,9 @@ console.log("product recieved", req.body)
       category,
       stock
     });
-    await product.save();
+   const savedProduct = await product.save();
+   console.log('Product created successfully:', savedProduct);
+
     res.status(201).json(product);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
