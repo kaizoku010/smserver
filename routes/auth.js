@@ -36,10 +36,14 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check for default admin login first
+    // Check for default admin login
     if (email === DEFAULT_ADMIN.email && password === 'admin123') {
       const token = jwt.sign(
-        { userId: DEFAULT_ADMIN.id, role: DEFAULT_ADMIN.role },
+        { 
+          userId: DEFAULT_ADMIN.id, 
+          email: DEFAULT_ADMIN.email,
+          role: DEFAULT_ADMIN.role 
+        },
         process.env.JWT_SECRET || 'mdx-64649',
         { expiresIn: '24h' }
       );
@@ -64,18 +68,18 @@ router.post('/login', async (req, res) => {
 
     const token = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.JWT_SECRET || 'your-secret-key',
+      process.env.JWT_SECRET || 'mdx-64649',
       { expiresIn: '24h' }
     );
 
     res.json({ 
-      token, 
-      user: { 
-        id: user._id, 
-        email: user.email, 
-        role: user.role, 
-        name: user.name 
-      } 
+      token,
+      user: {
+        id: user._id,
+        email: user.email,
+        role: user.role,
+        name: user.name
+      }
     });
   } catch (error) {
     console.error('Login error:', error);
@@ -108,3 +112,4 @@ router.get('/me', verifyToken, async (req, res) => {
 });
 
 export default router;
+
