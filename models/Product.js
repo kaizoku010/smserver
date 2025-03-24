@@ -25,9 +25,15 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  reviews: {
+    type: Number,
+    default: 0,
+    min: 0
   }
 }, {
   timestamps: true
 });
 
 export default mongoose.model('Product', productSchema);
+
