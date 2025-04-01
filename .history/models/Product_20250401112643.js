@@ -19,10 +19,9 @@ const productSchema = new mongoose.Schema({
     },
     unique: true
   },
-
- 
   color: {
     type: String,
+
   },
 
   description: {
