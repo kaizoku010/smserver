@@ -7,17 +7,7 @@ const productSchema = new mongoose.Schema({
   },
 
   reviews: {
-    type: Number,
-    required: true
-  },
-
-  sku: {
-    type: String,
-    required: true
-  },
-
-  color: {
-    type: String,
+    type: number,
     required: true
   },
 
@@ -42,7 +32,11 @@ const productSchema = new mongoose.Schema({
     required: true,
     default: 0
   },
- 
+  reviews: {
+    type: Number,
+    default: 0,
+    min: 0
+  }
 }, {
   timestamps: true
 });

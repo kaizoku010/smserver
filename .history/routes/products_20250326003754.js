@@ -49,22 +49,17 @@ router.get('/:id', async (req, res) => {
 router.post('/', [verifyToken, isAdmin], async (req, res) => {
   try {
     console.log('Create Product Request Body:', req.body);
-    const { name, description, price, image, category, stock, reviews, sku, color } = req.body;
+    const { name, description, price, image, category, stock } = req.body;
     const product = new Product({
       name,
-      reviews,
-      sku,
       description,
       price,
       image,
       category,
-      color,
       stock
     });
-    
     const savedProduct = await product.save();
-
-    // console.log('Product created successfully:', savedProduct);
+    console.log('Product created successfully:', savedProduct);
 
     // Send the saved product with 201 status
     return res.status(201).json({

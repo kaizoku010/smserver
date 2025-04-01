@@ -64,7 +64,7 @@ router.post('/', [verifyToken, isAdmin], async (req, res) => {
     
     const savedProduct = await product.save();
 
-    // console.log('Product created successfully:', savedProduct);
+    console.log('Product created successfully:', savedProduct);
 
     // Send the saved product with 201 status
     return res.status(201).json({

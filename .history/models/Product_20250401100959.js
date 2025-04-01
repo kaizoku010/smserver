@@ -16,10 +16,7 @@ const productSchema = new mongoose.Schema({
     required: true
   },
 
-  color: {
-    type: String,
-    required: true
-  },
+  colo
 
   description: {
     type: String,
@@ -42,7 +39,11 @@ const productSchema = new mongoose.Schema({
     required: true,
     default: 0
   },
- 
+  reviews: {
+    type: Number,
+    default: 0,
+    min: 0
+  }
 }, {
   timestamps: true
 });
