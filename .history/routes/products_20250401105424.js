@@ -49,7 +49,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', [verifyToken, isAdmin], async (req, res) => {
   try {
     console.log('Create Product Request Body:', req.body);
-    const { name, description, price, image, category, stock, reviews, color } = req.body;
+    const { name, description, price, image, category, stock, reviews, sku, color } = req.body;
     const product = new Product({
       name,
       reviews,

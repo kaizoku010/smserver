@@ -13,12 +13,9 @@ const productSchema = new mongoose.Schema({
 
   sku: {
     type: String,
-    default: function() {
-      const randomNum = Math.floor(100000 + Math.random() * 900000);
-      return `SMZ-${randomNum}`;
-    },
-    unique: true
+    required: true
   },
+
   color: {
     type: String,
     required: true
@@ -45,6 +42,7 @@ const productSchema = new mongoose.Schema({
     required: true,
     default: 0
   },
+ 
 }, {
   timestamps: true
 });

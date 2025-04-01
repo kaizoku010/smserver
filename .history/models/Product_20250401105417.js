@@ -14,11 +14,12 @@ const productSchema = new mongoose.Schema({
   sku: {
     type: String,
     default: function() {
+      // Generate a 6-digit random number
       const randomNum = Math.floor(100000 + Math.random() * 900000);
       return `SMZ-${randomNum}`;
     },
     unique: true
-  },
+  }
   color: {
     type: String,
     required: true
