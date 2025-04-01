@@ -23,6 +23,8 @@ const productSchema = new mongoose.Schema({
  
   color: {
     type: String,
+    required: false // Make color optional
+
   },
 
   description: {
